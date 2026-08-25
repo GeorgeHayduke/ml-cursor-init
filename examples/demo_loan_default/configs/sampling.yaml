@@ -1,0 +1,9 @@
+# Sampling Strategy — Step 2 (Data Gathering & Structuring)
+# Default method per ml-lifecycle.mdc: Out-of-Time (OOT)
+method: "out_of_time"
+seed: 42
+train_window: ["2024-01-01", "2025-03-11"]
+eval_window: ["2025-03-11", "2025-08-02"]
+test_window: ["2025-08-02", "2025-12-30"]
+counts: {"train": 3600, "eval": 1200, "test": 1200}
+target_rate: {"train": 0.1308, "eval": 0.1183, "test": 0.1267}

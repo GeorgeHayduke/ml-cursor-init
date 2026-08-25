@@ -1,0 +1,8 @@
+{
+  "champion": "catboost",
+  "refit_on_n_records": 6000,
+  "mean_abs_score_diff": 0.0582,
+  "correlation": 0.9082,
+  "verdict": "shifted \u2014 recalibrate (flag: optimistic, these records also trained the refit model)",
+  "calibration_gap_pre_refit": 0.0453
+}

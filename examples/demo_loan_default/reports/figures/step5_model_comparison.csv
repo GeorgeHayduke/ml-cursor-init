@@ -1,0 +1,4 @@
+model,eval_auc,best_params,n_trials
+random_forest,0.9180223115631407,"{'n_estimators': 400, 'max_depth': 10, 'min_samples_leaf': 5}",5
+xgboost,0.941112649431561,"{'n_estimators': 250, 'max_depth': 5, 'learning_rate': 0.05}",5
+catboost,0.9506576319923321,"{'depth': 6, 'learning_rate': 0.08, 'iterations': 250}",5

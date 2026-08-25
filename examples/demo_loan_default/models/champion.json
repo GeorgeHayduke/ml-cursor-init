@@ -1,0 +1,4 @@
+{
+  "champion": "catboost",
+  "test_roc_auc": 0.934
+}

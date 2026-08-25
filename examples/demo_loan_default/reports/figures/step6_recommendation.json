@@ -1,0 +1,14 @@
+{
+  "champion": "catboost",
+  "fp_cost": 50,
+  "fn_cost": 2000,
+  "recommended_operating_point": {
+    "fpr_target_pct": 4.5,
+    "threshold": 0.405,
+    "tpr": 0.8158,
+    "precision": 0.7294,
+    "recall": 0.8158,
+    "f1": 0.7702,
+    "expected_cost": 58355.0
+  }
+}

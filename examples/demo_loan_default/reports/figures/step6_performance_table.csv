@@ -1,0 +1,4 @@
+model,roc_auc,precision_at_0.5,recall_at_0.5,f1_at_0.5
+catboost,0.934,0.7947,0.7895,0.7921
+xgboost,0.9247,0.7312,0.7697,0.75
+random_forest,0.9007,0.6218,0.6382,0.6299

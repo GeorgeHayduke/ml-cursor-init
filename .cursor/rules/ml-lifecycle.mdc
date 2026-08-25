@@ -1,0 +1,162 @@
+---
+description: Standing conventions for ML projects in this repo — the 12-step lifecycle, stack defaults, and phase-gating discipline
+globs:
+alwaysApply: true
+---
+
+# ML Project Lifecycle — Standing Conventions
+
+Every ML project in this repo follows the same 12-step lifecycle. This is the
+authoritative framework — treat CRISP-DM/TDSP as background theory only, not
+the literal phase list to implement. Do not invent alternate phase names or
+skip steps; if a step is genuinely not applicable, say so explicitly in
+`PROJECT.md` rather than silently omitting it.
+
+## The 12 steps
+
+1. Problem Formulation
+2. Data Gathering & Structuring
+3. Data Exploration
+4. Feature Engineering
+5. Multi-Model Training
+6. Model Evaluation
+7. Model Interpretability
+8. Model Calibration
+9. Model Documentation
+10. Model Integration
+11. Model Monitoring
+12. Periodic Retraining (loops back to step 2/3)
+
+## Phase-gating
+
+Do not advance to the next step until the current step's definition-of-done
+(below, where one is specified) is satisfied. When asked to "move on" before
+that, flag the gap rather than silently proceeding.
+
+## Stack defaults
+
+- Language: Python + SQL. No other primary languages unless the user asks.
+- Step 5 (Multi-Model Training) default bake-off: **Random Forest + XGBoost +
+  CatBoost**, minimum three models compared. AutoGluon is *not* part of the
+  default trio — reach for it only for a quick-and-dirty first baseline or a
+  more advanced automated-ensembling pass, and only when asked or when it's
+  clearly the fastest path to an early signal.
+- Explainability: TreeSHAP by default for both global and local explanations
+  (CatBoost/XGBoost have native SHAP support; for RF or AutoGluon models, use
+  the `shap` TreeExplainer path). Do not substitute LIME or other
+  explainability libraries unless asked.
+- Experiment tracking: start with structured local run logs (JSON/YAML per
+  run under `experiments/`, one file per run capturing params, metrics, data
+  version, and git commit). Treat MLflow as the upgrade path once the project
+  has enough runs to need querying/comparison UI — don't reach for MLflow on
+  day one unless the user asks for it up front.
+
+## Cloud decision
+
+The cloud decision is made **once, up front** (at `/ml-init` or `/ml-define`
+time) — never inferred mid-project from data size or runtime heuristics.
+Confirm: is this project running in the cloud at all, and if so, which
+provider (GCP / AWS / Azure / other)? If yes, default compute-heavy steps
+(large-scale data prep, step 5 training, hyperparameter search) to a
+cloud-first execution pattern for that provider rather than local execution,
+and scaffold the matching cloud config directory. If no cloud was chosen,
+everything stays local-first in Python and cloud should not be introduced
+without re-confirming with the user.
+
+## Sampling strategy
+
+Default splitting method is **Out-of-Time (OOT)**, not random shuffling —
+temporal order matters and the split must respect it. Record, as part of
+Step 2 (Data Gathering & Structuring):
+
+- **Seed:** the random seed used for any stochastic step (model training,
+  any within-window subsampling).
+- **Train window:** the date range used to fit candidate models.
+- **Eval window:** the date range used for hyperparameter tuning / model
+  selection — comes after the train window, never overlapping it.
+- **Test window:** the most recent date range, held out and untouched until
+  final evaluation (steps 6-8) — the forward-looking OOT holdout that keeps
+  the eventual performance numbers honest.
+
+Do not perform Step 3 (Data Exploration) on the eval or test windows beyond
+confirming they exist and look structurally sane — exploring them defeats
+the point of holding them out. Every downstream artifact (step 5 training,
+step 6 evaluation, step 7 interpretability, step 8 calibration) should state
+plainly which window(s) it was computed on.
+
+## Step 6 definition-of-done — Model Evaluation
+
+- Performance table: ROC-AUC, Precision, Recall, F1 (with a one-line plain-
+  English explanation of F1 alongside it).
+- ROC chart annotated at a chosen score threshold, stating where that
+  threshold lands on FPR/TPR for the test set.
+- Precision-Recall chart annotated at the same threshold, translated into
+  precision/recall values.
+- **Operating table** (this repo's term for the threshold/operating-point
+  analysis): swept by **FPR from 0% to 5% in 0.25% increments**. For each FPR
+  step, back out the corresponding score threshold, TPR, precision, recall,
+  and F1. This is the standard operating-point artifact — do not substitute
+  a generic "threshold vs. accuracy" table for it.
+- Document how hyperparameters were chosen, and whether enough tuning trials
+  were run to trust the result (not just "we ran a grid search").
+
+## Step 7 definition-of-done — Model Interpretability
+
+- Global: variable importance, plus PDP/ALE/ICE on the top variables, driven
+  off TreeSHAP.
+- Local: three specific cohorts, each top-N, sorted exactly as follows:
+  - **TP** — actual positive class, ordered by the positive-class predicted
+    score (`pred_1`) **descending**.
+  - **FP** — actual negative class but high-scoring, ordered by `pred_1`
+    **descending**.
+  - **FN** — actual positive class but low-scoring, ordered by `pred_1`
+    **ascending**.
+- Bias probe: examine the TP/FP/FN cohorts above for shared attributes —
+  this is a fairness check, not optional polish.
+
+## Step 8 definition-of-done — Model Calibration
+
+Two distinct deliverables — do not merge this into step 6's operating table:
+
+- A calibration curve / reliability diagram for the model's raw scores.
+- Score normalization: a rank-based spline mapping the raw model score onto
+  a normalized 1-1000 scale, banded by population percentile. Starting
+  bands (adjust per project, these are a default not a law):
+  - 1000-900: top 0.25% of records (rarest / highest-risk)
+  - 900-800: next 0.25%
+  - 800-500: next 4.5%
+  - 500-0: remaining ~95%
+
+## Step 8.5 — Final Fit for Deployment
+
+Once the champion model, its hyperparameters, and its calibration are
+locked in from steps 5-8, refit that exact model (same architecture, same
+hyperparameters — do not re-tune here) on the **full dataset**: train + eval
++ test windows combined. This is the model that actually gets deployed —
+there's no reason to withhold the eval/test data from the production model
+once it's no longer needed for honest evaluation. Document this as an
+explicit checkpoint between Step 8 and Step 9 in every project, not an
+implicit detail buried in code.
+
+**Does calibration change?** Not necessarily, but don't assume — check it:
+
+1. Re-score the test-window records using the newly refit model.
+2. Compare that score distribution to the original test-window scores from
+   the pre-refit (train-only) model.
+3. If the distributions are close, carry the existing calibration mapping
+   and operating table forward as-is.
+4. If they've shifted meaningfully, recalibrate using the test-window
+   scores from the refit model against actual outcomes — flag that this is
+   slightly optimistic since those records were also used to fit the model
+   being calibrated. For a stricter check, hold back one more small,
+   most-recent slice *before* the full-data refit specifically for this
+   recalibration/QA pass, at the cost of a small amount of data the
+   production model never trains on.
+
+Document which path was taken in Step 9.
+
+## Reference
+
+See `PROJECT.md` in each project repo for that project's specific timeline,
+cloud decision, and per-step status. See `report_template.docx` (when
+supplied) for the exact section headers `/ml-document` should mirror.

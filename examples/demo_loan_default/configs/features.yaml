@@ -1,0 +1,6 @@
+# Feature definitions — Step 4 (Feature Engineering)
+leakage_review: "no columns excluded \u2014 all fields knowable at origination time"
+base_features: ["credit_utilization", "income", "debt_to_income", "months_on_book", "num_delinquencies_24m", "credit_score_proxy", "loan_to_value", "num_inquiries_6m", "payment_history_score", "revolving_balance", "employment_stability", "feat_misc_1"]
+derived_features: {"delinquency_rate": "num_delinquencies_24m / (months_on_book_clipped + 1) \u2014 recent delinquency intensity", "utilization_x_dti": "credit_utilization * debt_to_income \u2014 interaction, both individually predictive"}
+categorical_features: {"region": {"catboost": "passed through natively, flagged as categorical", "rf_xgboost": "one-hot encoded, categories fit on train only: ['A', 'B', 'C', 'D']"}}
+preprocessing_fit_on: "train window only"

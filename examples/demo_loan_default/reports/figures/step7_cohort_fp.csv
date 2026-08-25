@@ -1,0 +1,11 @@
+record_id,pred_1,actual,top_shap_drivers
+L100569,0.91214839685765,0,credit_score_proxy=+1.253; months_on_book=+1.115; loan_to_value=+1.036
+L100874,0.8679757537477876,0,months_on_book=+1.345; debt_to_income=+0.633; credit_utilization=+0.429
+L100176,0.8421849571625782,0,debt_to_income=+1.099; loan_to_value=+0.733; months_on_book=+0.696
+L101235,0.8407831329974673,0,loan_to_value=+1.459; feat_misc_1=-0.706; revolving_balance=+0.684
+L103450,0.8372142123056033,0,revolving_balance=+1.199; utilization_x_dti=+0.688; debt_to_income=+0.618
+L101702,0.8322441018403888,0,months_on_book=+1.082; income=+0.611; debt_to_income=+0.554
+L103910,0.821667271551469,0,months_on_book=+1.099; loan_to_value=+1.007; credit_score_proxy=+0.830
+L104149,0.8028818979123049,0,loan_to_value=+0.805; months_on_book=+0.650; income=+0.628
+L101811,0.8012123853991944,0,debt_to_income=+0.902; months_on_book=+0.762; credit_utilization=+0.542
+L102003,0.7935579258543117,0,months_on_book=+0.920; loan_to_value=+0.571; delinquency_rate=+0.544

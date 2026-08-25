@@ -1,0 +1,11 @@
+record_id,pred_1,actual,top_shap_drivers
+L101701,0.998459956294503,1,feat_misc_1=+2.215; revolving_balance=+1.781; credit_score_proxy=+1.252
+L104600,0.9983653649217175,1,revolving_balance=+1.308; loan_to_value=+1.278; credit_score_proxy=+1.153
+L100159,0.9982390269176432,1,feat_misc_1=+2.010; debt_to_income=+1.061; credit_score_proxy=+0.972
+L103253,0.9976005691554242,1,feat_misc_1=+2.109; months_on_book=+0.993; credit_utilization=+0.964
+L101609,0.9973632688238652,1,credit_utilization=+1.791; credit_score_proxy=+1.397; debt_to_income=+1.196
+L100213,0.9970102980314696,1,feat_misc_1=+2.338; revolving_balance=+2.016; payment_history_score=+1.161
+L104410,0.9964789543067926,1,months_on_book=+1.599; credit_utilization=+1.416; feat_misc_1=+1.247
+L104447,0.9957178986845051,1,feat_misc_1=+2.495; revolving_balance=+2.448; credit_score_proxy=+1.066
+L105345,0.9949901202873076,1,feat_misc_1=+2.944; revolving_balance=+2.131; credit_utilization=+1.095
+L105623,0.9934092689079096,1,debt_to_income=+2.150; loan_to_value=+1.416; months_on_book=+1.363
