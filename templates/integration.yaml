@@ -1,0 +1,30 @@
+# Written by /ml-integrate — scoring contract for the shipped champion.
+# Fill at integrate time; do not invent a new threshold here.
+
+mode: batch  # batch | api | embed
+schedule: null
+cloud: local  # local | gcp | aws | azure | other
+
+champion_artifact: models/champion_final.cbm
+preprocessor_dir: models/preprocessing
+features_config: configs/features.yaml
+
+operating_point:
+  threshold: null
+  fpr: null
+  tpr: null
+  action: null  # what decision=1 does in the process
+
+explain:
+  method: treeshap
+  rows: actioned_only  # actioned_only | all
+
+cutover: shadow  # shadow | replace
+
+output_fields:
+  - record_id
+  - pred_1
+  - score_norm
+  - decision
+  - model_version
+  - scored_at

@@ -19,12 +19,21 @@ done
 # Bundle templates next to the skills that need them (global install has no repo root).
 mkdir -p "$DEST_SKILLS/ml-init/assets" \
          "$DEST_SKILLS/ml-document/assets" \
-         "$DEST_SKILLS/ml-document/scripts"
+         "$DEST_SKILLS/ml-document/scripts" \
+         "$DEST_SKILLS/ml-integrate/assets" \
+         "$DEST_SKILLS/ml-monitor/assets" \
+         "$DEST_SKILLS/ml-retrain/assets"
 
 cp "$ROOT/.cursor/rules/ml-lifecycle.mdc" "$DEST_SKILLS/ml-init/assets/"
 cp "$ROOT/templates/report_template.md" "$DEST_SKILLS/ml-init/assets/"
 cp "$ROOT/templates/document_model.py" "$DEST_SKILLS/ml-init/assets/"
 cp "$ROOT/templates/model_report_template.html" "$DEST_SKILLS/ml-init/assets/"
+cp "$ROOT/templates/integration.yaml" "$DEST_SKILLS/ml-init/assets/"
+cp "$ROOT/templates/monitoring.yaml" "$DEST_SKILLS/ml-init/assets/"
+cp "$ROOT/templates/retrain.yaml" "$DEST_SKILLS/ml-init/assets/"
+cp "$ROOT/templates/integration.yaml" "$DEST_SKILLS/ml-integrate/assets/"
+cp "$ROOT/templates/monitoring.yaml" "$DEST_SKILLS/ml-monitor/assets/"
+cp "$ROOT/templates/retrain.yaml" "$DEST_SKILLS/ml-retrain/assets/"
 
 cp "$ROOT/templates/document_model.py" "$DEST_SKILLS/ml-document/scripts/"
 cp "$ROOT/templates/model_report_template.html" "$DEST_SKILLS/ml-document/assets/"

@@ -54,9 +54,9 @@ example project, not a real deployment replacing an existing process.
 | 8. Model Calibration | ✅ done |
 | 8.5. Final Fit for Deployment | ✅ done |
 | 9. Model Documentation | ✅ done (this report) |
-| 10. Model Integration | ⬜ not built — `/ml-integrate` doesn't exist yet |
-| 11. Model Monitoring | ⬜ not built — `/ml-monitor` doesn't exist yet |
-| 12. Periodic Retraining | ⬜ not built — `/ml-retrain` doesn't exist yet |
+| 10. Model Integration | ⬜ skill exists (`/ml-integrate`) — not run on this demo |
+| 11. Model Monitoring | ⬜ skill exists (`/ml-monitor`) — not run on this demo |
+| 12. Periodic Retraining | ⬜ skill exists (`/ml-retrain`) — not run on this demo |
 
 ## Leakage review (Step 4)
 

@@ -25,6 +25,8 @@ Copy into the new project:
 - `ml-lifecycle.mdc` → `<project>/.cursor/rules/ml-lifecycle.mdc`
 - `report_template.md` → `<project>/templates/report_template.md`
 - `document_model.py` and `model_report_template.html` → `<project>/templates/`
+- `integration.yaml`, `monitoring.yaml`, `retrain.yaml` → `<project>/templates/`
+  (filled later by `/ml-integrate` / `/ml-monitor` / `/ml-retrain`)
 - This skill pack (the `ml-*` folders under `.cursor/skills/`) → `<project>/.cursor/skills/` so teammates without a global install still get `/ml-init` etc.
 
 ## Step 1 — Ask before scaffolding

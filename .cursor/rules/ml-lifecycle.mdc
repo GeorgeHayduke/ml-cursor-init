@@ -155,6 +155,44 @@ implicit detail buried in code.
 
 Document which path was taken in Step 9.
 
+## Step 10 definition-of-done — Model Integration
+
+- Scoring contract on every record: `record_id`, `pred_1`, `score_norm`
+  (locked 1–1000 map), `decision` at the **locked** Step 6 operating
+  point, `model_version`, `scored_at`.
+- Loads `champion_final` and train-fit preprocessors only — no refit on
+  production data.
+- Serving mode recorded (batch / API / embed) and honors the up-front
+  cloud decision.
+- TreeSHAP explanations for the actioned cohort (default), not LIME.
+- Written to `configs/integration.yaml` plus `src/` scorer.
+
+## Step 11 definition-of-done — Model Monitoring
+
+- Watch three things: input drift vs **train** features, score drift vs
+  the **test-window** `pred_1` / `score_norm` baseline, labeled
+  performance at the locked operating point **once outcomes exist**.
+- Label lag is explicit; do not invent labeled metrics before outcomes
+  can exist.
+- Alerts produce `ok` / `investigate` / `retrain_candidate` — they do
+  not silently retrain or retune the threshold.
+- Written to `configs/monitoring.yaml`, job under `src/`, reports under
+  `reports/monitoring/`.
+
+## Step 12 definition-of-done — Periodic Retraining
+
+- Trigger recorded (monitor verdict, cadence, or ad hoc).
+- New data, then a **slid OOT** split (new most-recent slice = new test).
+  Explore the new train window only.
+- Default: same champion family, **held** hyperparameters, same feature
+  definitions. Re-tune or re-bake-off only if the user confirms.
+- Old shipped model is scored on the **new** test window; promote only if
+  the candidate beats it on the `/ml-define` success metric **and** still
+  meets the business constraint on a fresh operating table.
+- On promote: new operating point, TreeSHAP, calibration, Step 8.5 refit,
+  new `model_version`, previous artifact kept for rollback. Loops back to
+  steps 2/3 on the next trigger.
+
 ## Reference
 
 See `PROJECT.md` in each project repo for that project's specific timeline,

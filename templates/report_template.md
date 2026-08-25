@@ -264,24 +264,48 @@ production use.
 
 ## 10. Model Integration
 
-> Fill in: how this model reaches production — batch job, API, embedded in
-> another pipeline — and, if a cloud provider was chosen up front, which
-> services carry it (e.g. GCP Vertex, AWS SageMaker/Batch, Azure ML).
+> Fill in: serving mode (batch / API / embed), schedule, and — if a cloud
+> provider was chosen up front — which services carry it. Name the
+> `champion_final` artifact and git commit (`model_version`).
+
+- **Scoring contract:** `record_id`, `pred_1`, `score_norm` (1–1000),
+  `decision` at the locked operating point, `model_version`, `scored_at`
+- **Locked operating point:** [threshold / FPR / TPR / what `decision=1` does]
+- **Explanations:** TreeSHAP on [actioned rows only / every row]
+- **Cutover:** [shadow / replace]
 
 ---
 
 ## 11. Model Monitoring
 
-> Fill in: what gets watched in production (input drift, score
-> distribution drift, performance decay against ground truth once it's
-> available) and the alerting thresholds.
+> Fill in: cadence, label lag (when outcomes become knowable), and who is
+> alerted. Baselines are the train-window features and the test-window
+> scores/performance from steps 6–8 — not a live-data refit.
+
+| Watch | Baseline | Alert (investigate / retrain_candidate) |
+|---|---|---|
+| Input drift (PSI on features, at least top SHAP) | train window | [e.g. 0.20 / 0.30] |
+| Score drift (`pred_1`, `score_norm`, action rate) | test window | [e.g. 0.20 / 0.30] |
+| Labeled performance at the **locked** threshold | test operating point + FP/FN costs | [e.g. AUC −0.03; cost worse than Step 6 rec] |
+
+A `retrain_candidate` verdict points to `/ml-retrain`; it does not start
+a retrain by itself.
 
 ---
 
 ## 12. Periodic Retraining
 
-> Fill in: retraining cadence or trigger conditions, and what changes each
-> retrain (data window, features, hyperparameters re-tuned or held fixed).
+> Fill in: trigger (monitor / cadence / ad hoc), new OOT windows, what was
+> held vs changed (architecture, hyperparameters, features), old-vs-new
+> test metrics, promote or keep, new operating point if promoted, rollback
+> path to the previous `champion_final`.
+
+| | Previous shipped | This candidate |
+|---|---|---|
+| Test window | | |
+| Primary metric | | |
+| Operating point | | |
+| Decision | keep / promote | |
 
 ---
 

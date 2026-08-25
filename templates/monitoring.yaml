@@ -1,0 +1,25 @@
+# Written by /ml-monitor. Baselines are train features + test scores from
+# steps 6–8, not a live-data refit.
+
+cadence:
+  scores: every_scoring_run
+  labeled_performance: when_outcomes_closed
+
+label_lag: null  # e.g. 12 months — until then, drift only
+
+baselines:
+  features: train_window
+  scores: test_window
+  performance: test_operating_point
+
+alerts:
+  feature_psi:
+    investigate: 0.20
+    retrain_candidate: 0.30
+  score_psi:
+    investigate: 0.20
+    retrain_candidate: 0.30
+  auc_drop_vs_test: 0.03
+
+output_dir: reports/monitoring
+stakeholders: []

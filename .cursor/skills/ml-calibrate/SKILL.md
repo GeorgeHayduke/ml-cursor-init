@@ -60,6 +60,5 @@ evaluation). Write the refit confirmation and drift-check outcome into
 ## Step 9 — Wrap up
 
 Check off Step 8 and Step 8.5 in `PROJECT.md`. Point to `/ml-document` to
-assemble the finished report, and `/ml-integrate` (predict/explain/label)
-after that — that skill is not in this pack yet; flag it rather than
-inventing an integration design.
+assemble the finished report, and `/ml-integrate` (predict / explain /
+label) after that.

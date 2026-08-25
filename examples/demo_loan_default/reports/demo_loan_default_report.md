@@ -310,11 +310,11 @@ business signal. The Section 8.5 finding (recalibration needed) is the
 one result here likely to generalize to real projects using this
 framework — treat it as a standing warning, not a one-off.
 
-## 10. Model Integration — `[Pending — /ml-integrate not yet built]`
+## 10. Model Integration — `[Pending — not run on this demo]`
 
-## 11. Model Monitoring — `[Pending — /ml-monitor not yet built]`
+## 11. Model Monitoring — `[Pending — not run on this demo]`
 
-## 12. Periodic Retraining — `[Pending — /ml-retrain not yet built]`
+## 12. Periodic Retraining — `[Pending — not run on this demo]`
 
 ---
 

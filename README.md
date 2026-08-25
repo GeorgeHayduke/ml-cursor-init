@@ -21,7 +21,9 @@ you type          lifecycle
 /ml-calibrate     8. Model Calibration
                   8.5 Final Fit for Deployment
 /ml-document      9. Model Documentation
-                  10–12 not in this pack yet
+/ml-integrate     10. Model Integration            ← predict / explain / label
+/ml-monitor       11. Model Monitoring             ← ongoing
+/ml-retrain       12. Periodic Retraining          ← loops to 2/3
 ```
 
 ---
@@ -181,10 +183,55 @@ analysis; it gathers `PROJECT.md`, configs, figures, and run logs into
 filled with fake numbers.
 
 Demo output: `examples/demo_loan_default/reports/demo_loan_default_report.md`
-(and `reports/report.html`).
+(and `reports/report.html`). The synthetic demo stopped after step 9;
+steps 10–12 were not executed there.
 
-**After that:** steps 10–12 (`/ml-integrate`, `/ml-monitor`, `/ml-retrain`)
-are not in this pack. Stop, or design them by hand.
+**Next:** `/ml-integrate`
+
+### 10. `/ml-integrate` — predict / explain / label
+
+**When:** after the report, with `champion_final` and a locked operating
+point.
+
+**You answer:** batch vs API vs embed; schedule; what `decision=1` does
+(e.g. send to review); shadow vs cutover; SHAP on actioned rows only
+(default) or every row.
+
+**You get:** `configs/integration.yaml` and a scorer that emits
+`pred_1`, `score_norm` (1–1000), `decision` at the locked threshold,
+`model_version`. Does **not** retune.
+
+**Next:** `/ml-monitor`
+
+### 11. `/ml-monitor` — watch production (ongoing)
+
+**When:** scoring is defined. Writes the job and baselines now; runs
+forever after that.
+
+**You answer:** cadence; when labels exist (lag from the target
+definition); who to alert. Defaults if you have none: feature/score PSI
+0.20 investigate / 0.30 retrain candidate; AUC drop ≥ 0.03 vs test.
+
+**You get:** `configs/monitoring.yaml`, `reports/monitoring/` runs,
+verdict `ok` / `investigate` / `retrain_candidate`. A retrain verdict
+does **not** start `/ml-retrain` by itself.
+
+**Next:** `/ml-retrain` when the verdict or the calendar says so.
+
+### 12. `/ml-retrain` — slide windows, then maybe promote
+
+**When:** monitor says `retrain_candidate`, or the cadence is due, or
+you ask.
+
+**You answer:** why this run; hold HPs (default) vs re-tune; same
+champion family (default) vs full bake-off.
+
+**You get:** new OOT split (new most-recent = new test), old model scored
+on that new test as the bar, candidate evaluated with a fresh operating
+table. Promote only if it beats the old model on the success metric
+**and** still meets the FP/FN constraint. Then new calibration + 8.5
+refit, new `model_version`, previous artifact kept for rollback. Next
+event is another monitor run or the next cadence — back to steps 2/3.
 
 ---
 

@@ -50,11 +50,13 @@ content for it:
 - Calibration artifacts (reliability diagram, score-normalization bands) —
   from `/ml-calibrate`, once it exists.
 - The Step 8.5 final-fit decision and its calibration-drift check.
+- Integration / monitoring / retrain configs (`configs/integration.yaml`,
+  `configs/monitoring.yaml`, `configs/retrain.yaml`) once those skills
+  have run.
 
-If a later-step skill doesn't exist yet in this pack, or hasn't been run
-yet in this project, mark that section `[Pending — Step N not yet run]` in
-the output rather than fabricating numbers or leaving the generic template
-prompt text in place.
+If a later-step skill hasn't been run yet in this project, mark that
+section `[Pending — Step N not yet run]` in the output rather than
+fabricating numbers or leaving the generic template prompt text in place.
 
 ## Step 2 — Assemble the report
 
@@ -86,5 +88,4 @@ report and which sections (if any) are still `[Pending]`. Note explicitly
 that this report should be regenerated — not hand-edited and left stale —
 whenever an upstream step changes materially (a recalibration after Step
 8.5, a retrain in Step 12), and that `/ml-integrate` (step 10) is next once
-the report is complete. That skill is not in this pack yet; flag it rather
-than inventing an integration design.
+the report is complete.

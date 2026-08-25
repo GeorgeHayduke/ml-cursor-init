@@ -1,0 +1,17 @@
+# Written by /ml-retrain. Defaults: hold hyperparameters, same champion
+# family, same feature definitions. Slide OOT windows; do not shuffle.
+
+cadence: null  # e.g. quarterly, and/or on retrain_candidate
+last_run: null
+last_trigger: null  # monitor | cadence | ad_hoc
+
+hold_hyperparameters: true
+rebake_off: false  # true = RF + XGBoost + CatBoost again
+same_feature_definitions: true
+
+promotion:
+  require_beat_old_model_on_new_test: true
+  require_business_constraint: true
+
+rollback_artifact: null
+current_artifact: models/champion_final.cbm
