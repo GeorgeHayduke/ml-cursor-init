@@ -30,8 +30,32 @@ skip steps; if a step is genuinely not applicable, say so explicitly in
 ## Phase-gating
 
 Do not advance to the next step until the current step's definition-of-done
-(below, where one is specified) is satisfied. When asked to "move on" before
-that, flag the gap rather than silently proceeding.
+(below, where one is specified) is satisfied **and** that step's tests
+pass (`python -m pytest` — later-step classes skip until their artifacts
+exist). When asked to "move on" before that, flag the gap rather than
+silently proceeding.
+
+## Tests at each step
+
+Tests are part of the stack, not optional polish. `/ml-init` copies
+`templates/tests/` into the project `tests/` folder. After each skill,
+update those tests if paths/names changed, then run pytest. Do not wrap
+the skill until the matching class in `test_lifecycle_steps.py` passes:
+
+| After | Class | Contract |
+|---|---|---|
+| `/ml-init` | `TestStep00Init` | scaffold dirs + `PROJECT.md` |
+| `/ml-define` | `TestStep01Define` | target, success criteria, business constraint |
+| `/ml-data` | `TestStep02Data` | OOT windows, seed, disjoint ids |
+| `/ml-prep` | `TestStep04Prep` | aligned feature tables, no unseen train cats |
+| `/ml-model` | `TestStep05Model` | RF + XGBoost + CatBoost, eval metrics logged |
+| `/ml-evaluate` | `TestStep06Evaluate` | 21-row FPR operating table, champion |
+| `/ml-explain` | `TestStep07Explain` | TP/FP/FN sort order, TreeSHAP importance |
+| `/ml-calibrate` | `TestStep08Calibrate` | 1–1000 bands, 8.5 summary |
+| `/ml-document` | `TestStep09Document` | report has no `Fill in:` prompts |
+| `/ml-integrate` | `TestStep10Integrate` | scoring contract fields, threshold set |
+| `/ml-monitor` | `TestStep11Monitor` | PSI alerts, `retrain_candidate` |
+| `/ml-retrain` | `TestStep12Retrain` | promotion gate vs old model on new test |
 
 ## Stack defaults
 

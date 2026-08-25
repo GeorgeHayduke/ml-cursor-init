@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = []
+
+[project]
+name = "ml-cursor-init"
+version = "0.1.0"
+description = "Cursor skills for a 12-step ML model lifecycle"
+requires-python = ">=3.10"
+readme = "README.md"
+
+[project.optional-dependencies]
+test = [
+  "pytest>=8",
+  "numpy",
+  "pandas",
+  "scikit-learn",
+  "scipy",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "templates/tests"]
+addopts = "-q"

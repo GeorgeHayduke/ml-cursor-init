@@ -86,6 +86,9 @@ charter reads as one complete document.
 
 ## Step 4 — Wrap up
 
+Run `python -m pytest tests/test_lifecycle_steps.py::TestStep01Define`. Do
+not wrap until it passes.
+
 Check off Step 1 in the lifecycle checklist. Tell the user the charter and
 timeline are in `PROJECT.md`, restate the business constraint and target
 definition back to them for confirmation, and point to `/ml-data` as next,

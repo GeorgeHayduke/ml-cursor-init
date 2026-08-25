@@ -59,6 +59,9 @@ evaluation). Write the refit confirmation and drift-check outcome into
 
 ## Step 9 — Wrap up
 
+Run `python -m pytest tests/test_lifecycle_steps.py::TestStep08Calibrate`. Do
+not wrap until it passes.
+
 Check off Step 8 and Step 8.5 in `PROJECT.md`. Point to `/ml-document` to
 assemble the finished report, and `/ml-integrate` (predict / explain /
 label) after that.

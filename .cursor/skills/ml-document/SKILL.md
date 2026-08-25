@@ -83,6 +83,9 @@ the template — this is what makes reports comparable across projects.
 
 ## Step 4 — Wrap up
 
+Run `python -m pytest tests/test_lifecycle_steps.py::TestStep09Document`. Do
+not wrap until it passes.
+
 Check off Step 9 in `PROJECT.md`. Tell the user the path to the finished
 report and which sections (if any) are still `[Pending]`. Note explicitly
 that this report should be regenerated — not hand-edited and left stale —

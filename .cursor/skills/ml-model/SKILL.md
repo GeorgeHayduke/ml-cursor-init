@@ -68,6 +68,9 @@ window and the business constraint pinned down in `/ml-define`.
 
 ## Step 6 — Wrap up
 
+Run `python -m pytest tests/test_lifecycle_steps.py::TestStep05Model`. Do
+not wrap until it passes.
+
 Check off Step 5 in `PROJECT.md`. Tell the user the roster trained, trial
 counts per model, and the eval-window comparison, and that `/ml-evaluate`
 (step 6) is next — where the real, reportable performance numbers get

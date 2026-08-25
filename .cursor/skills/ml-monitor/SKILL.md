@@ -84,6 +84,10 @@ runs (params = thresholds, data version, git commit, verdict).
 
 ## Step 5 — Wrap up
 
+Run `python -m pytest tests/test_lifecycle_steps.py::TestStep11Monitor`. Do
+not wrap until it passes (a missing `reports/monitoring/` run skips, not
+fails, until the first live/shadow scores exist).
+
 Fill `templates/report_template.md` Section 11. Check off Step 11 in
 `PROJECT.md` as "in place (ongoing)." Tell the user which defaults were
 used, when labeled metrics will first be possible (lag), and that

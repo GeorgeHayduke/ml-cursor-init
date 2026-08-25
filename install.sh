@@ -35,6 +35,10 @@ cp "$ROOT/templates/integration.yaml" "$DEST_SKILLS/ml-integrate/assets/"
 cp "$ROOT/templates/monitoring.yaml" "$DEST_SKILLS/ml-monitor/assets/"
 cp "$ROOT/templates/retrain.yaml" "$DEST_SKILLS/ml-retrain/assets/"
 
+mkdir -p "$DEST_SKILLS/ml-init/assets/tests"
+cp "$ROOT/templates/tests/"*.py "$DEST_SKILLS/ml-init/assets/tests/"
+cp "$ROOT/templates/tests/pytest.ini" "$DEST_SKILLS/ml-init/assets/tests/"
+
 cp "$ROOT/templates/document_model.py" "$DEST_SKILLS/ml-document/scripts/"
 cp "$ROOT/templates/model_report_template.html" "$DEST_SKILLS/ml-document/assets/"
 cp "$ROOT/templates/report_template.md" "$DEST_SKILLS/ml-document/assets/"

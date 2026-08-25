@@ -107,6 +107,9 @@ the previous artifact for rollback). Repeat the 8.5 drift check.
 
 ## Step 5 — Cut over and wrap
 
+Run `python -m pytest tests/test_lifecycle_steps.py::TestStep12Retrain`. Do
+not wrap until it passes.
+
 Update `configs/integration.yaml` `model_version` to the new artifact.
 Do not delete the previous version until a rollback window the user
 names has passed. Point `/ml-monitor` baselines at the new train

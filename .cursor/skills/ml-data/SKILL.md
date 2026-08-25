@@ -94,6 +94,9 @@ someone fills in later from memory.
 
 ## Step 4 — Wrap up
 
+Run `python -m pytest tests/test_lifecycle_steps.py::TestStep02Data`. Do
+not wrap until it passes.
+
 Check off steps 2 and 3 in `PROJECT.md`. Tell the user what was decided —
 sampling windows, seed, key EDA findings, anomaly count, any leakage risks
 flagged — and that `/ml-prep` (Feature Engineering, step 4) is next.

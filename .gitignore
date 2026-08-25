@@ -9,3 +9,6 @@ venv/
 .env.*
 *.tar.gz
 _to_delete/
+.pytest_cache/
+.coverage
+htmlcov/

@@ -27,6 +27,8 @@ Copy into the new project:
 - `document_model.py` and `model_report_template.html` → `<project>/templates/`
 - `integration.yaml`, `monitoring.yaml`, `retrain.yaml` → `<project>/templates/`
   (filled later by `/ml-integrate` / `/ml-monitor` / `/ml-retrain`)
+- `templates/tests/` → `<project>/tests/` (per-step pytest contracts; later
+  classes skip until that step's artifacts exist)
 - This skill pack (the `ml-*` folders under `.cursor/skills/`) → `<project>/.cursor/skills/` so teammates without a global install still get `/ml-init` etc.
 
 ## Step 1 — Ask before scaffolding
@@ -73,6 +75,7 @@ it — e.g. add a cloud directory only if cloud was chosen):
 ├── reports/
 │   └── figures/
 ├── configs/
+├── tests/                    # per-step pytest; copied from this kit
 ├── templates/                # report_template.md + document_model.py
 ├── cloud/                    # only if a cloud provider was chosen
 │   └── <gcp|aws|azure|other>/
@@ -119,6 +122,9 @@ anything under `data/`, `models/`, or run-log outputs even if they happen to
 exist already — respect `.gitignore` from the first commit.
 
 ## Step 5 — Hand off
+
+Run `python -m pytest tests/test_lifecycle_steps.py::TestStep00Init`. Do
+not hand off until it passes.
 
 Tell the user the repo is scaffolded, restate the cloud/tracking decisions
 back to them so there's no ambiguity, and point them to `/ml-define` as the

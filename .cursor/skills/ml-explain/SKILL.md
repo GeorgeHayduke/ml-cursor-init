@@ -46,6 +46,9 @@ nothing notable — don't skip this because it came back clean.
 
 ## Step 4 — Write up and wrap
 
+Run `python -m pytest tests/test_lifecycle_steps.py::TestStep07Explain`. Do
+not wrap until it passes.
+
 Write global and local sections into `templates/report_template.md` Section
 7. Check off Step 7 in `PROJECT.md`. Point to `/ml-calibrate` (step 8,
 which also covers step 8.5's final-fit) as next.

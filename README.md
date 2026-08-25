@@ -235,6 +235,22 @@ event is another monitor run or the next cadence — back to steps 2/3.
 
 ---
 
+## Tests
+
+```bash
+python -m pip install pytest numpy pandas scikit-learn scipy
+python -m pytest
+```
+
+Covers skill frontmatter and process order, report/config templates, the
+FPR operating-table contract, TP/FP/FN sort order, score bands, a dry-run
+of `install.sh`, and **per-step lifecycle tests**
+(`templates/tests/test_lifecycle_steps.py`, run against
+`examples/demo_loan_default`). After each `/ml-*` skill, that step's class
+must pass before moving on; later classes skip until their artifacts exist.
+
+---
+
 ## How to invoke
 
 In **Agent** chat:

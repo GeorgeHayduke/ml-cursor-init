@@ -69,6 +69,9 @@ is suspiciously close to its untuned baseline, say so.
 
 ## Step 8 — Write up and wrap
 
+Run `python -m pytest tests/test_lifecycle_steps.py::TestStep06Evaluate`. Do
+not wrap until it passes.
+
 Write the performance table, ROC/PR charts, operating table, and
 recommended operating point into `templates/report_template.md` Section 6.
 Check off Step 6 in `PROJECT.md`, name the champion model explicitly (this

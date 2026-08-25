@@ -96,6 +96,9 @@ user chose async explain.
 
 ## Step 5 — Write up and wrap
 
+Run `python -m pytest tests/test_lifecycle_steps.py::TestStep10Integrate`. Do
+not wrap until it passes.
+
 Fill `templates/report_template.md` Section 10 (and the project report
 if it already exists). Check off Step 10 in `PROJECT.md`. Restate mode,
 threshold, and champion artifact. Point to `/ml-monitor` as next —

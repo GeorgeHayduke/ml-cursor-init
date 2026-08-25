@@ -67,6 +67,9 @@ prediction time, and no transform was fit using eval or test rows.
 
 ## Step 5 — Wrap up
 
+Run `python -m pytest tests/test_lifecycle_steps.py::TestStep04Prep`. Do
+not wrap until it passes.
+
 Check off Step 4 in `PROJECT.md`. Tell the user the feature count, anything
 excluded for leakage and why, and that `/ml-model` (Multi-Model Training,
 step 5) is next.
