@@ -1,6 +1,12 @@
+---
+name: ml-evaluate
+description: Score the untouched test window, pick a champion, and build the FPR operating table. Use for model evaluation, ROC/PR, operating points, or when the user says /ml-evaluate.
+disable-model-invocation: true
+---
+
 # /ml-evaluate — Model Evaluation (Step 6)
 
-Run after `/ml-model`. **This is the first command that touches the test
+Run after `/ml-model`. **This is the first skill that touches the test
 window.** Everything before this used train/eval only — treat the test
 window as a one-shot resource: score it once per candidate model, don't
 iterate against it, and don't come back to re-tune based on what it shows.
@@ -64,7 +70,7 @@ is suspiciously close to its untuned baseline, say so.
 ## Step 8 — Write up and wrap
 
 Write the performance table, ROC/PR charts, operating table, and
-recommended operating point into `report_template.md` Section 6. Check off
-Step 6 in `PROJECT.md`, name the champion model explicitly (this is what
-`/ml-explain` and `/ml-calibrate` operate on next), and point to
+recommended operating point into `templates/report_template.md` Section 6.
+Check off Step 6 in `PROJECT.md`, name the champion model explicitly (this
+is what `/ml-explain` and `/ml-calibrate` operate on next), and point to
 `/ml-explain` as next.

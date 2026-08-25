@@ -158,5 +158,7 @@ Document which path was taken in Step 9.
 ## Reference
 
 See `PROJECT.md` in each project repo for that project's specific timeline,
-cloud decision, and per-step status. See `report_template.docx` (when
-supplied) for the exact section headers `/ml-document` should mirror.
+cloud decision, and per-step status. See `templates/report_template.md`
+(or `report_template.docx` when supplied) for the exact section headers
+`/ml-document` should mirror. Step skills live in `.cursor/skills/` (and,
+after a global install, `~/.cursor/skills/`).

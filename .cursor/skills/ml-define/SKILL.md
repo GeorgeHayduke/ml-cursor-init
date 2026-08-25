@@ -1,3 +1,9 @@
+---
+name: ml-define
+description: Write the ML problem charter into PROJECT.md — target, success criteria, business constraint, timeline. Use after /ml-init, for problem formulation, or when the user says /ml-define.
+disable-model-invocation: true
+---
+
 # /ml-define — Problem Formulation (Step 1)
 
 Run after `/ml-init`. This expands the one-line problem statement from init
@@ -82,5 +88,5 @@ charter reads as one complete document.
 
 Check off Step 1 in the lifecycle checklist. Tell the user the charter and
 timeline are in `PROJECT.md`, restate the business constraint and target
-definition back to them for confirmation, and point to `/ml-data` (already
-built) as next, unless it's already been run.
+definition back to them for confirmation, and point to `/ml-data` as next,
+unless it's already been run.

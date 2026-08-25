@@ -1,8 +1,8 @@
 # demo_loan_default — Model Development Report
 
-**Author:** Claude (Cowork) · **Date:** 2026-08-24 · **Repo:** `env_cursor_ml/examples/demo_loan_default` · **Status:** simulated worked example (synthetic data)
+**Author:** Claude (Cowork) · **Date:** 2026-08-24 · **Repo:** `ml-cursor-init/examples/demo_loan_default` · **Status:** simulated worked example (synthetic data)
 
-This is a fully worked, end-to-end run of the `env_cursor_ml` lifecycle —
+This is a fully worked, end-to-end run of the `ml-cursor-init` lifecycle —
 `/ml-define` → `/ml-data` → `/ml-prep` → `/ml-model` → `/ml-evaluate` →
 `/ml-explain` → `/ml-calibrate` — against synthetic data, produced to prove
 out the rules/templates/commands built so far, not a real credit decision.
@@ -318,6 +318,6 @@ framework — treat it as a standing warning, not a one-off.
 
 ---
 
-*Generated as a worked example of `report_template.md` in `env_cursor_ml`,
+*Generated as a worked example of `report_template.md` in `ml-cursor-init`,
 via `src/01_data.py` through `src/06_calibrate.py`. Re-run those scripts
 (seed=42) to reproduce every number above exactly.*

@@ -1,7 +1,7 @@
 # demo_loan_default — Project Charter & Status
 
 **Status:** Simulated worked example — synthetic data, built to exercise the
-`env_cursor_ml` Cursor rules/commands end to end, not a real project.
+`ml-cursor-init` Cursor rules/skills end to end, not a real project.
 
 ## 1. Problem Formulation
 

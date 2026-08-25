@@ -1,17 +1,36 @@
+---
+name: ml-document
+description: Assemble the finished model report from PROJECT.md, configs, and step artifacts. Use for model documentation, HTML reports, document_model.py, or when the user says /ml-document.
+disable-model-invocation: true
+---
+
 # /ml-document — Model Documentation (Step 9)
 
-Run once steps 1-8.5 have produced real content to assemble — this command
+Run once steps 1-8.5 have produced real content to assemble — this skill
 doesn't generate new analysis, it gathers what earlier steps already
 produced into one finished, shareable document. It can be run partway
 through a project to snapshot current status, but the output should say
 plainly which sections are still pending rather than silently leaving old
 placeholder text in place.
 
-This is also the command to reach for when someone wants the finished
+This is also the skill to reach for when someone wants the finished
 report to hand to another project or another person — the output file is
 self-contained and portable, unlike `PROJECT.md` (which is this repo's
 working status doc) or `templates/report_template.md` (which is the blank
 template, not a finished report).
+
+## Kit files
+
+Resolve the report template and `document_model.py` in this order:
+
+1. `assets/report_template.md` and `scripts/document_model.py` next to this
+   `SKILL.md` (global install)
+2. Workspace `templates/report_template.md` and `templates/document_model.py`
+
+If the user wants a mechanical HTML report from an already-trained model
+(no full lifecycle), run `scripts/document_model.py` (or the workspace
+copy) instead of assembling markdown by hand. The HTML template is
+`assets/model_report_template.html` or `templates/model_report_template.html`.
 
 ## Step 1 — Check what's actually available
 
@@ -32,7 +51,7 @@ content for it:
   from `/ml-calibrate`, once it exists.
 - The Step 8.5 final-fit decision and its calibration-drift check.
 
-If a later-step command doesn't exist yet in this repo, or hasn't been run
+If a later-step skill doesn't exist yet in this pack, or hasn't been run
 yet in this project, mark that section `[Pending — Step N not yet run]` in
 the output rather than fabricating numbers or leaving the generic template
 prompt text in place.
@@ -67,4 +86,5 @@ report and which sections (if any) are still `[Pending]`. Note explicitly
 that this report should be regenerated — not hand-edited and left stale —
 whenever an upstream step changes materially (a recalibration after Step
 8.5, a retrain in Step 12), and that `/ml-integrate` (step 10) is next once
-the report is complete.
+the report is complete. That skill is not in this pack yet; flag it rather
+than inventing an integration design.

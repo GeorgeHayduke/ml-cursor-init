@@ -1,9 +1,15 @@
+---
+name: ml-model
+description: Train the RF + XGBoost + CatBoost bake-off on train, tune on eval, log runs. Use for multi-model training, hyperparameter search, or when the user says /ml-model.
+disable-model-invocation: true
+---
+
 # /ml-model — Multi-Model Training (Step 5)
 
-Run after `/ml-prep`. Confirm `configs/sampling.yaml` and `configs/
-features.yaml` both exist before starting — if either is missing, stop and
-point back to `/ml-data` or `/ml-prep` rather than guessing at a split or
-feature set.
+Run after `/ml-prep`. Confirm `configs/sampling.yaml` and
+`configs/features.yaml` both exist before starting — if either is missing,
+stop and point back to `/ml-data` or `/ml-prep` rather than guessing at a
+split or feature set.
 
 This step trains on **train**, tunes and selects on **eval**. It does not
 touch the **test** window at all — that stays untouched until `/ml-evaluate`
@@ -37,9 +43,9 @@ before kicking off anything that spends meaningful cloud compute.
 For each model, define a search space and a tuning method (random search,
 Bayesian/Optuna, or the cloud service's native tuner), tune against the eval
 window only, and **record the number of trials run for each model** — this
-is required later in `report_template.md` Section 5.1, which explicitly
-asks whether enough trials were run to trust the result. Don't tune one
-model for 200 trials and another for 10 without saying so.
+is required later in `templates/report_template.md` Section 5.1, which
+explicitly asks whether enough trials were run to trust the result. Don't
+tune one model for 200 trials and another for 10 without saying so.
 
 ## Step 4 — Log every run
 
@@ -53,12 +59,12 @@ answerable later instead of reconstructed from memory.
 ## Step 5 — Compare and persist
 
 Produce a comparison table (model, key hyperparameters, eval-window
-metrics) and write it into `report_template.md` Section 5. Persist each
-tuned model's artifact under `models/` (e.g. `models/random_forest.pkl`,
-`models/xgboost.json`, `models/catboost.cbm`). Don't yet declare a single
-"champion" based on eval performance alone — that call belongs to
-`/ml-evaluate`, which tests against the untouched test window and the
-business constraint pinned down in `/ml-define`.
+metrics) and write it into `templates/report_template.md` Section 5.
+Persist each tuned model's artifact under `models/` (e.g.
+`models/random_forest.pkl`, `models/xgboost.json`, `models/catboost.cbm`).
+Don't yet declare a single "champion" based on eval performance alone —
+that call belongs to `/ml-evaluate`, which tests against the untouched test
+window and the business constraint pinned down in `/ml-define`.
 
 ## Step 6 — Wrap up
 

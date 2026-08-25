@@ -1,10 +1,31 @@
+---
+name: ml-init
+description: Scaffold a new ML project repo, lock cloud/tracking decisions, and write PROJECT.md. Use when starting an ML project, initializing a model repo, or when the user says /ml-init.
+disable-model-invocation: true
+---
+
 # /ml-init — Initialize a new ML project repo
 
 Run this once, at the very start of a new project. It scaffolds the repo and
 locks in the handful of decisions that shouldn't be revisited mid-project
 (cloud, tracking). Follow the standing conventions in
-`.cursor/rules/ml-lifecycle.mdc` throughout — this command is what puts those
+`.cursor/rules/ml-lifecycle.mdc` throughout — this skill is what puts those
 conventions into an actual repo.
+
+## Kit files
+
+Resolve in this order (do not invent a template from scratch if a kit file exists):
+
+1. `assets/` next to this `SKILL.md` (global install via `./install.sh`)
+2. Current workspace, if this kit is open: `templates/` and `.cursor/rules/ml-lifecycle.mdc`
+3. Ask where the kit clone lives if neither exists
+
+Copy into the new project:
+
+- `ml-lifecycle.mdc` → `<project>/.cursor/rules/ml-lifecycle.mdc`
+- `report_template.md` → `<project>/templates/report_template.md`
+- `document_model.py` and `model_report_template.html` → `<project>/templates/`
+- This skill pack (the `ml-*` folders under `.cursor/skills/`) → `<project>/.cursor/skills/` so teammates without a global install still get `/ml-init` etc.
 
 ## Step 1 — Ask before scaffolding
 
@@ -34,9 +55,9 @@ it — e.g. add a cloud directory only if cloud was chosen):
 
 ```
 <project>/
-├── .cursor/                  # already present if this command is run from
-│                             #   the shared template; otherwise copy
-│                             #   ml-lifecycle.mdc and the command set in
+├── .cursor/
+│   ├── rules/ml-lifecycle.mdc
+│   └── skills/               # copy the ml-* skill pack from this kit
 ├── data/
 │   ├── raw/
 │   ├── interim/
@@ -50,6 +71,7 @@ it — e.g. add a cloud directory only if cloud was chosen):
 ├── reports/
 │   └── figures/
 ├── configs/
+├── templates/                # report_template.md + document_model.py
 ├── cloud/                    # only if a cloud provider was chosen
 │   └── <gcp|aws|azure|other>/
 │       └── README.md         # stub — fill in as integration/monitoring
@@ -98,5 +120,4 @@ exist already — respect `.gitignore` from the first commit.
 
 Tell the user the repo is scaffolded, restate the cloud/tracking decisions
 back to them so there's no ambiguity, and point them to `/ml-define` as the
-next command (step 1, Problem Formulation, in full — this command only
-seeds it).
+next skill (step 1, Problem Formulation, in full — this skill only seeds it).

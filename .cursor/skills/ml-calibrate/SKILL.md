@@ -1,9 +1,15 @@
+---
+name: ml-calibrate
+description: Calibration curve, 1-1000 score bands, then full-data final fit with a drift check. Use for calibration, score normalization, deployment refit, or when the user says /ml-calibrate.
+disable-model-invocation: true
+---
+
 # /ml-calibrate — Model Calibration (Step 8 + Step 8.5)
 
-Run after `/ml-explain`. This command covers both Step 8 (Calibration) and
+Run after `/ml-explain`. This skill covers both Step 8 (Calibration) and
 Step 8.5 (Final Fit for Deployment) — they're handled together here since
 8.5's calibration-drift check needs the same champion/test context Step 8
-just built, rather than reloading it in a separate command.
+just built, rather than reloading it in a separate skill.
 
 ## Step 8.1 — Calibration curve
 
@@ -25,7 +31,7 @@ project, note here if they were changed):
 | 800-500 | ~4.5% |
 | 500-0 | ~95% |
 
-Write both deliverables into `report_template.md` Section 8.
+Write both deliverables into `templates/report_template.md` Section 8.
 
 ## Step 8.5 — Final fit for deployment
 
@@ -46,13 +52,14 @@ the model that actually deploys.
    check, note that a small most-recent slice should have been held back
    before the full refit specifically for this validation.
 
-Persist the refit model as the deployment artifact (e.g. `models/
-champion_final.*`, distinct from the pre-refit champion used for
+Persist the refit model as the deployment artifact (e.g.
+`models/champion_final.*`, distinct from the pre-refit champion used for
 evaluation). Write the refit confirmation and drift-check outcome into
-`report_template.md` Section 8.5.
+`templates/report_template.md` Section 8.5.
 
 ## Step 9 — Wrap up
 
-Check off Step 8 and Step 8.5 in `PROJECT.md`. Point to `/ml-document`
-(already built) to assemble the finished report, and `/ml-integrate`
-(predict/explain/label) after that.
+Check off Step 8 and Step 8.5 in `PROJECT.md`. Point to `/ml-document` to
+assemble the finished report, and `/ml-integrate` (predict/explain/label)
+after that — that skill is not in this pack yet; flag it rather than
+inventing an integration design.

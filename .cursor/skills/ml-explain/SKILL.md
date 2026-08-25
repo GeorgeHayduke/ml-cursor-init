@@ -1,3 +1,9 @@
+---
+name: ml-explain
+description: TreeSHAP global/local explanations plus TP/FP/FN cohorts and a bias probe. Use for interpretability, SHAP, fairness checks, or when the user says /ml-explain.
+disable-model-invocation: true
+---
+
 # /ml-explain — Model Interpretability (Step 7)
 
 Run after `/ml-evaluate`, against the champion model it named. Everything
@@ -40,6 +46,6 @@ nothing notable — don't skip this because it came back clean.
 
 ## Step 4 — Write up and wrap
 
-Write global and local sections into `report_template.md` Section 7. Check
-off Step 7 in `PROJECT.md`. Point to `/ml-calibrate` (step 8, which also
-covers step 8.5's final-fit) as next.
+Write global and local sections into `templates/report_template.md` Section
+7. Check off Step 7 in `PROJECT.md`. Point to `/ml-calibrate` (step 8,
+which also covers step 8.5's final-fit) as next.

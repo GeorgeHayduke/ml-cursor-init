@@ -1,3 +1,9 @@
+---
+name: ml-prep
+description: Engineer features, resolve leakage, and fit preprocessors on the train window only. Use for feature engineering, encoding, or when the user says /ml-prep.
+disable-model-invocation: true
+---
+
 # /ml-prep — Feature Engineering (Step 4)
 
 Run after `/ml-data`. Reads `data/processed/train.*` / `eval.*` / `test.*`
@@ -22,10 +28,10 @@ as of each record's timestamp). Confirm the list with the user rather than
 silently generating dozens of features; more isn't automatically better and
 each one is something `/ml-explain` has to account for later.
 
-Write the feature list — name, derivation, rationale — into `configs/
-features.yaml` and into `report_template.md` Section 4. This file, along
-with `configs/sampling.yaml`, is what `/ml-model` reads to know what it's
-training on.
+Write the feature list — name, derivation, rationale — into
+`configs/features.yaml` and into `templates/report_template.md` Section 4.
+This file, along with `configs/sampling.yaml`, is what `/ml-model` reads to
+know what it's training on.
 
 ## Step 3 — Preprocessing: fit on train only
 

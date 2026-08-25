@@ -1,8 +1,14 @@
+---
+name: ml-data
+description: Land data, lock the Out-of-Time sampling split, and explore the train window only. Use for data gathering, sampling strategy, EDA, or when the user says /ml-data.
+disable-model-invocation: true
+---
+
 # /ml-data — Data Gathering, Structuring & Exploration (Steps 2-3)
 
 Run after `/ml-init` (and ideally `/ml-define`, though this works from
 whatever problem statement exists in `PROJECT.md` if `/ml-define` hasn't run
-yet — flag that gap rather than blocking on it). This command owns the
+yet — flag that gap rather than blocking on it). This skill owns the
 **sampling strategy** for the project — every later step reads the split it
 produces here rather than re-deriving or re-asking for it.
 
@@ -41,7 +47,7 @@ don't assume:
   random/stratified instead, get explicit confirmation and record the
   deviation with a reason — OOT is the house default, not the only option.
 - **Seed:** pick and record one (e.g. 42, or user-specified) — this seed is
-  reused by every later step, not re-rolled per command.
+  reused by every later step, not re-rolled per skill.
 - **Train window:** date range.
 - **Eval window:** date range, immediately after train, no overlap.
 - **Test window:** most recent date range, no overlap with eval, held out
@@ -55,12 +61,12 @@ proceed silently).
 
 Write the finalized strategy to `configs/sampling.yaml` (method, seed,
 window boundaries) — this file is the single source of truth every
-downstream command reads, not something re-asked at each step. Split
+downstream skill reads, not something re-asked at each step. Split
 `data/interim/` into `data/processed/train.*`, `eval.*`, `test.*`
 accordingly.
 
-Update `PROJECT.md` and `report_template.md` Section 2.1 with the finalized
-sampling strategy.
+Update `PROJECT.md` and `templates/report_template.md` Section 2.1 with the
+finalized sampling strategy.
 
 ## Step 3 — Data exploration (train window only)
 
@@ -82,9 +88,9 @@ Within the train window:
   corrected).
 
 Save generated charts to `reports/figures/` and write the findings straight
-into `report_template.md` Section 3 (3.1 and the anomaly table) — this
-section should be close to final after this step, not a placeholder someone
-fills in later from memory.
+into `templates/report_template.md` Section 3 (3.1 and the anomaly table) —
+this section should be close to final after this step, not a placeholder
+someone fills in later from memory.
 
 ## Step 4 — Wrap up
 

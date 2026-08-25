@@ -1,9 +1,9 @@
 <!--
 report_template.md
 
-Shared template referenced by `.cursor/commands/ml-document.md` (step 9,
+Shared template referenced by `.cursor/skills/ml-document/SKILL.md` (step 9,
 Model Documentation) and by `.cursor/rules/ml-lifecycle.mdc`. One copy lives
-here in env_cursor_ml; each project repo gets its own filled-in copy under
+here in ml-cursor-init; each project repo gets its own filled-in copy under
 `reports/`.
 
 How to use: work through the sections in order — most of them can be
@@ -285,6 +285,6 @@ production use.
 
 ---
 
-*Generated from `report_template.md` in `env_cursor_ml`. See
+*Generated from `report_template.md` in `ml-cursor-init`. See
 `.cursor/rules/ml-lifecycle.mdc` for the conventions this template
 encodes.*
