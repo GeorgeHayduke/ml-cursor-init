@@ -12,11 +12,7 @@ probe), and Calibration (reliability diagram + rank-based score
 normalization). All narrative sentences are generated mechanically from the
 computed numbers — nothing here requires a human or an AI in the loop to
 produce a complete, honest report; an AI assistant (e.g. running this from a
-<<<<<<< HEAD
-Cursor command) can still improve the prose afterward, but the tool doesn't
-=======
 Cursor skill) can still improve the prose afterward, but the tool doesn't
->>>>>>> 0cfa092 (Migrate slash commands to Cursor skills and drop kit junk.)
 depend on it.
 
 Usage (single model):
